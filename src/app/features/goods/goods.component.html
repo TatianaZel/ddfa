@@ -1,1 +1,27 @@
-<p>goods works!</p>
+<div class="app-page">
+
+  <div class="app-page__header">
+    <app-filters
+      [filterOptions]="filterOption"
+      (filtersChanged)="onFiltersChanged($event)"
+    ></app-filters>
+  </div>
+
+  <div class="app-page__content">
+    <app-table
+      [dataSource]="dataSource"
+      [displayedColumns]="displayedColumns"
+    ></app-table>
+  </div>
+
+  <div class="app-page__footer">
+    <app-pagination
+      [length]="goodsAmount"
+      [pageSize]="10"
+      [pageIndex]="pageIndex"
+      [disabled]="isLoading"
+      (pageChange)="onPageChanged($event)"
+    ></app-pagination>
+  </div>
+
+</div>

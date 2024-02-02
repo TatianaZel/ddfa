@@ -1,0 +1,27 @@
+<form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filters-form">
+  <div *ngFor="let option of filterOptions">
+    <ng-container [ngSwitch]="option.type">
+      <mat-form-field *ngSwitchCase="'text'" class="example-full-width">
+        <mat-label>{{ option.key | titlecase }}</mat-label>
+        <input matInput [formControlName]="option.key" placeholder="Filter by {{ option.key }}">
+      </mat-form-field>
+
+      <mat-form-field *ngSwitchCase="'select'" class="example-full-width">
+        <mat-label>{{ option.key | titlecase }}</mat-label>
+        <mat-select [formControlName]="option.key">
+          <mat-option *ngFor="let item of option.options" [value]="item.value">
+            {{ item.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngSwitchCase="'date'" class="example-full-width">
+        <mat-label>{{ option.key | titlecase }}</mat-label>
+        <input matInput [matDatepicker]="picker" [formControlName]="option.key" placeholder="Choose a date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </ng-container>
+  </div>
+<!--  <button mat-raised-button color="primary" type="submit">Apply Filters</button>-->
+</form>
