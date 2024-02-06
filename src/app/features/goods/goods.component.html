@@ -1,8 +1,8 @@
 <div class="app-page">
-
   <div class="app-page__header">
     <app-filters
-      [filterOptions]="filterOption"
+      [disabled]="isLoading"
+      [filterOptions]="filterOptions"
       (filtersChanged)="onFiltersChanged($event)"
     ></app-filters>
   </div>
@@ -16,12 +16,9 @@
 
   <div class="app-page__footer">
     <app-pagination
-      [length]="goodsAmount"
-      [pageSize]="10"
-      [pageIndex]="pageIndex"
+      [paginationInfo]="paginationInfo"
       [disabled]="isLoading"
       (pageChange)="onPageChanged($event)"
     ></app-pagination>
   </div>
-
 </div>

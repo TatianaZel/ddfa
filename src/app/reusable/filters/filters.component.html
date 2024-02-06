@@ -1,4 +1,4 @@
-<form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filters-form">
+<form [formGroup]="filterForm" (ngSubmit)="applyFilters()" class="filters-form" [attr.disabled]="disabled">
   <div *ngFor="let option of filterOptions">
     <ng-container [ngSwitch]="option.type">
       <mat-form-field *ngSwitchCase="'text'" class="example-full-width">

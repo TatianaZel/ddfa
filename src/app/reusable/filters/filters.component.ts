@@ -7,6 +7,7 @@ import { MatDatepickerModule, MatDatepicker, MatDatepickerInput, MatDatepickerTo
 import { MatOption } from "@angular/material/autocomplete";
 import { MatSelect } from "@angular/material/select";
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { FilterOption } from "../../models/filter-option";
 
 @Component({
   selector: 'app-filters',
@@ -32,11 +33,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   styleUrl: './filters.component.scss'
 })
 export class FiltersComponent implements OnInit {
-  @Input() filterOptions: {
-    key: string,
-    type: 'text' | 'select' | 'date',
-    options?: { value: string; viewValue: string; }[]
-  }[] = [];
+  @Input() filterOptions: FilterOption[] = [];
+  @Input() disabled: boolean = false;
   @Output() filtersChanged = new EventEmitter<any>();
 
   filterForm: FormGroup | any;
@@ -48,21 +46,15 @@ export class FiltersComponent implements OnInit {
     this.filterOptions.forEach(option => {
       formControls[option.key] = [null];
     });
-    console.log(this.filterOptions);
-    console.log(formControls);
 
     this.filterForm = this.fb.group(formControls);
 
     this.filterForm.valueChanges.subscribe((changes: any) => {
-      console.log('Form value changes:', changes);
-      console.log('changes!!!', changes);
       this.applyFilters();
     });
   }
 
   applyFilters() {
-
     this.filtersChanged.emit(this.filterForm.value);
   }
-
 }

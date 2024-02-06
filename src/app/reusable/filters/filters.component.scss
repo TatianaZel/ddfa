@@ -1,9 +1,9 @@
 .filters-form {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: start;
 
   &>div {
-
+    margin-right: 20px;
   }
 }
