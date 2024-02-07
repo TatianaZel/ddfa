@@ -1,27 +1,16 @@
-# Ddfa
+Вітаю!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
+Це результат виконання мого тестового завдання :)
 
-## Development server
+Що б хотілося підкреслити для тих хто буде це все передивлятися)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1. Я організувала структуру проектування так щоб в подальшому його можна було легко і зручно розширювати, наприклад додавати нові фічі в src/app/features або все що підлягає перевикористанню в src/app/reusable
+2. Додала в проект стор, для того щоб кешувати дані по ключу який формується з обраних значень фільтрів та пагінаціі і не відправляти повторні запити для завантаження товарів які вже були завантажені
+3. Підключила UI фреймворк Angular Material, але не використовую компоненти з бібліотеки напряму, а обертаю їх в кастомні компоненти
+4. Дані товарів я винесла в src/assets/products.json і підключила до проекту JSON server для того щоб імітувати роботу із реальним сервером, але нажаль цей інструмент має обмежені можливості і наприклад я не можу отримати тільки загальне число товарів яке має використовуватись в пагінації, тому я зробила невеликий костиль у src/app/features/goods/goods.service.ts який помітила коментарем
+5. На цьому поки все, в подальшому я б хотіла додати тести і модернізувати компонент таблиці, для того щоб зробити його більш гнучким і задавати як саме я хочу відображати строки
 
-## Code scaffolding
+"start" - запуск проекту
+"json-server" - запуск серверу для отримання даних з JSON файлу
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Дякую за увагу ! ( ͡° ͜ʖ ͡°)
