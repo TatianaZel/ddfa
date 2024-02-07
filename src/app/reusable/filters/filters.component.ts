@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
@@ -30,7 +30,8 @@ import { FilterOption } from "../../models/filter-option";
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './filters.component.html',
-  styleUrl: './filters.component.scss'
+  styleUrl: './filters.component.scss',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FiltersComponent implements OnInit {
   @Input() filterOptions: FilterOption[] = [];
@@ -56,7 +57,14 @@ export class FiltersComponent implements OnInit {
   }
 
   applyFilters() {
-    console.log(this.filterForm.value);
-    this.filtersChanged.emit(this.filterForm.value);
+    const newFilters = {...this.filterForm.value}
+
+    for (let prop in newFilters) {
+      if (newFilters[prop] === null || newFilters[prop] === '') {
+        delete newFilters[prop];
+      }
+    }
+
+    this.filtersChanged.emit(newFilters);
   }
 }

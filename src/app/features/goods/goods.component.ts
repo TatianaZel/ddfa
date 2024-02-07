@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { TableComponent } from "../../reusable/table/table.component";
 import { PaginationComponent } from "../../reusable/pagination/pagination.component";
@@ -9,13 +9,13 @@ import { selectProductsByFiltersAndPage, selectProductsError } from '../../store
 import { loadProducts } from '../../store/goods/product.actions';
 import { Product } from "../../models/poduct";
 import { ActivatedRoute, Router } from '@angular/router';
-import {Observable, Subscription, take} from "rxjs";
+import { Observable, Subscription, take } from "rxjs";
 import { TitleCasePipe } from "@angular/common";
 
 const INITIAL_PAGINATION: PaginationInfo = {
   pageIndex: 0,
   pageSize: 10,
-  length: 1000, // to do
+  length: 0,
 };
 
 const FILTER_OPTIONS: FilterOption[] = [
@@ -41,7 +41,8 @@ const DISPLAYED_COLUMNS : string[] = ['id', 'name', 'category', 'price', 'descri
     TitleCasePipe,
   ],
   templateUrl: './goods.component.html',
-  styleUrl: './goods.component.scss'
+  styleUrl: './goods.component.scss',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoodsComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = DISPLAYED_COLUMNS;
@@ -55,7 +56,7 @@ export class GoodsComponent implements OnInit, OnDestroy {
   dataSource: Product[] = [];
 
   $error: Observable<Error>;
-  $currentProducts: Observable<Product[]> | undefined;
+  $currentProducts: Observable<{products: Product[], total: number}> | undefined;
 
   errorSubscription: Subscription | undefined;
   currentProductsSubscription: Subscription | undefined;
@@ -142,7 +143,11 @@ export class GoodsComponent implements OnInit, OnDestroy {
         this.store.dispatch(loadProducts({ filters: this.selectedFilters, pagination: this.paginationInfo }));
       } else {
         this.isLoading = false;
-        this.dataSource = res;
+        this.dataSource = res.products;
+        this.paginationInfo = {
+          ...this.paginationInfo,
+          length: res.total
+        };
         this.updateUrlParameters();
         if (this.currentProductsSubscription) {
           this.currentProductsSubscription.unsubscribe(); // if the data has already been loaded, we can unsubscribe

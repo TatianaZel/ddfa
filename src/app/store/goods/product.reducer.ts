@@ -9,11 +9,11 @@ export const initialState: ProductState = {
 
 export const productReducer = createReducer(
   initialState,
-  on(productActions.loadProductsSuccess, (state, { key, products }) => ({
+  on(productActions.loadProductsSuccess, (state, { key, products, total }) => ({
     ...state,
     productsCache: {
       ...state.productsCache,
-      [key]: products
+      [key]: {products, total}
     },
     error: null
   })),

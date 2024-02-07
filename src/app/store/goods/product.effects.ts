@@ -12,9 +12,9 @@ export class ProductEffects {
       ofType(productActions.loadProducts),
       mergeMap(({ filters, pagination }) =>
         this.productService.getProducts(filters, pagination).pipe(
-          map((products) => {
-            const key = JSON.stringify({filters, pagination}); // to do !
-            return productActions.loadProductsSuccess({ key, products });
+          map((res) => {
+            const key = JSON.stringify({filters, pagination});
+            return productActions.loadProductsSuccess({ key, products: res.products, total: res.total });
           }),
           catchError((error) => of(productActions.loadProductsFailure({ error })))
         )

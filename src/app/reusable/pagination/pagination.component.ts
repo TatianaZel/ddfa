@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { PaginationInfo } from "../../models/pagination-info";
 
@@ -7,7 +7,8 @@ import { PaginationInfo } from "../../models/pagination-info";
   standalone: true,
   imports: [MatPaginator],
   templateUrl: './pagination.component.html',
-  styleUrl: './pagination.component.scss'
+  styleUrl: './pagination.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent {
   @Input() paginationInfo: PaginationInfo = {
