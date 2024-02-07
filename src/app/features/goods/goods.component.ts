@@ -42,7 +42,7 @@ const DISPLAYED_COLUMNS : string[] = ['id', 'name', 'category', 'price', 'descri
   ],
   templateUrl: './goods.component.html',
   styleUrl: './goods.component.scss',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoodsComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = DISPLAYED_COLUMNS;

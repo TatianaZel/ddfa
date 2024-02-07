@@ -10,7 +10,9 @@ export const selectProductsByFiltersAndPage = (props: { pagination: PaginationIn
     selectProductsCache,
     (cache) => {
       // const cache: { [key: string]: Product[] } = state.productsCache;  // Adjust the property name if needed
-      const key = JSON.stringify({ filters: props.filters, pagination: props.pagination });
+      const key = JSON.stringify({ filters: props.filters, pagination: {pageIndex: props.pagination.pageIndex, pageSize: props.pagination.pageSize} });
+      console.log('key', key);
+      console.log('cache', cache);
       return cache[key];
     }
   );

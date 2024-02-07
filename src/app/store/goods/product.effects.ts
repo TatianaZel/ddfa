@@ -13,7 +13,7 @@ export class ProductEffects {
       mergeMap(({ filters, pagination }) =>
         this.productService.getProducts(filters, pagination).pipe(
           map((res) => {
-            const key = JSON.stringify({filters, pagination});
+            const key = JSON.stringify({ filters, pagination: {pageIndex: pagination.pageIndex, pageSize: pagination.pageSize} });
             return productActions.loadProductsSuccess({ key, products: res.products, total: res.total });
           }),
           catchError((error) => of(productActions.loadProductsFailure({ error })))
