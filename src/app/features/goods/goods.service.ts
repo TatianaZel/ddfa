@@ -7,16 +7,16 @@ import { PaginationInfo } from "../../models/pagination-info";
 @Injectable({
   providedIn: 'root',
 })
-export class ProductService { // to do !
-  private apiUrl = 'https://65c03df825a83926ab961c1b.mockapi.io/ddfa/products?';
+export class ProductService {
+  private apiUrl = 'http://localhost:3000/products?';
 
   constructor(private http: HttpClient) {}
 
   getProducts(filters: any, pagination: PaginationInfo): Observable<Product[]> {
     const params = {
       ...filters,
-      page: pagination.pageIndex.toString(),
-      pageSize: pagination.pageSize.toString(),
+      _start: pagination.pageIndex * pagination.pageSize,
+      _limit: pagination.pageSize.toString(),
     };
 
     return this.http.get<Product[]>(this.createQueryString(params)); // to do ! (add parameters)
@@ -29,5 +29,6 @@ export class ProductService { // to do !
       .join('&');
 
     return this.apiUrl + queryString;
+    // return this.apiUrl;
   }
 }

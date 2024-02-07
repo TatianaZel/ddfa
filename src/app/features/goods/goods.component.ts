@@ -10,6 +10,8 @@ import { loadProducts } from '../../store/goods/product.actions';
 import { Product } from "../../models/poduct";
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from "rxjs";
+import {MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef} from "@angular/material/table";
+import {NgForOf, TitleCasePipe} from "@angular/common";
 
 const INITIAL_PAGINATION: PaginationInfo = {
   pageIndex: 0,
@@ -27,7 +29,7 @@ const FILTER_OPTIONS: FilterOption[] = [
     ]},
 ];
 
-const DISPLAYED_COLUMNS : string[] = ['image', 'name', 'category', 'price', 'description'];
+const DISPLAYED_COLUMNS : string[] = ['id', 'name', 'category', 'price', 'description'];
 
 @Component({
   selector: 'app-goods',
@@ -35,7 +37,14 @@ const DISPLAYED_COLUMNS : string[] = ['image', 'name', 'category', 'price', 'des
   imports: [
     FiltersComponent,
     TableComponent,
-    PaginationComponent
+    PaginationComponent,
+    MatCell,
+    MatCellDef,
+    MatHeaderCell,
+    NgForOf,
+    TitleCasePipe,
+    MatHeaderCellDef,
+    MatColumnDef
   ],
   templateUrl: './goods.component.html',
   styleUrl: './goods.component.scss'
@@ -63,7 +72,9 @@ export class GoodsComponent implements OnInit, OnDestroy {
     this.$error.subscribe((err) => {
       if (err) {
         this.isLoading = false;
-        if (this.currentProductsSubscription) this.currentProductsSubscription.unsubscribe();
+        if (this.currentProductsSubscription) {
+          this.currentProductsSubscription.unsubscribe();
+        }
         alert('Error occurred!');
       }
     });
@@ -111,7 +122,7 @@ export class GoodsComponent implements OnInit, OnDestroy {
     }));
 
     this.currentProductsSubscription = this.$currentProducts.subscribe((res) => {
-        if (!res) { // if the data has already been loaded, we can dispatch loading
+        if (!res) { // if the data has not been loaded, we can dispatch loading
           this.store.dispatch(loadProducts({ filters: this.selectedFilters, pagination: this.paginationInfo }));
         } else {
           this.isLoading = false;
