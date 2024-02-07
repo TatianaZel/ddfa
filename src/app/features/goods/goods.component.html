@@ -3,6 +3,7 @@
     <app-filters
       [disabled]="isLoading"
       [filterOptions]="filterOptions"
+      [defaultFilters]="selectedFilters"
       (filtersChanged)="onFiltersChanged($event)"
     ></app-filters>
   </div>

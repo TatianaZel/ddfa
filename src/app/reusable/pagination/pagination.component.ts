@@ -20,10 +20,10 @@ export class PaginationComponent {
   @Output() pageChange = new EventEmitter<PaginationInfo>();
 
   handlePageEvent(e: PageEvent) {
-    this.paginationInfo.pageIndex = e.pageIndex;
-    this.paginationInfo.pageSize = e.pageSize;
-    // this.paginationInfo.length = e.length;
-
-    this.pageChange.emit(this.paginationInfo);
+    this.pageChange.emit({
+      pageIndex: e.pageIndex,
+      pageSize: e.pageSize,
+      length: this.paginationInfo.length
+    });
   }
 }

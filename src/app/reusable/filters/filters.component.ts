@@ -34,6 +34,7 @@ import { FilterOption } from "../../models/filter-option";
 })
 export class FiltersComponent implements OnInit {
   @Input() filterOptions: FilterOption[] = [];
+  @Input() defaultFilters: any = {};
   @Input() disabled: boolean = false;
   @Output() filtersChanged = new EventEmitter<any>();
 
@@ -44,7 +45,7 @@ export class FiltersComponent implements OnInit {
   ngOnInit() {
     const formControls: any = {};
     this.filterOptions.forEach(option => {
-      formControls[option.key] = [null];
+      formControls[option.key] = [this.defaultFilters[option.key] || null];
     });
 
     this.filterForm = this.fb.group(formControls);
@@ -55,6 +56,7 @@ export class FiltersComponent implements OnInit {
   }
 
   applyFilters() {
+    console.log(this.filterForm.value);
     this.filtersChanged.emit(this.filterForm.value);
   }
 }
