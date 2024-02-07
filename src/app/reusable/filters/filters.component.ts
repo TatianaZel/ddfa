@@ -31,7 +31,7 @@ import { FilterOption } from "../../models/filter-option";
   providers: [provideNativeDateAdapter()],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.scss',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FiltersComponent implements OnInit {
   @Input() filterOptions: FilterOption[] = [];
