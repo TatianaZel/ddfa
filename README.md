@@ -1,10 +1,10 @@
 # **Hello!This is the result of completing my test task! Here are some highlights for those who will be reviewing it:**
 
-1. I organized the project structure so that it could be easily and conveniently expanded in the future, for example by adding new features in src/app/features or anything reusable in src/app/reusable.
-2. I added a store to the project to cache data by a key formed from selected filter values and pagination, avoiding sending duplicate requests to load products that have already been loaded.
+1. I organized the project structure so that it could be easily and conveniently expanded in the future. For example, new features can be added in src/app/features, and anything reusable can be placed in src/app/reusable.
+2. I added a store to the project to cache data using a key formed from selected filter values and pagination, avoiding duplicate requests to load products that have already been loaded.
 3. I integrated the Angular Material UI framework, but I don't use components from the library directly; instead, I wrap them in custom components.
-4. I placed the product data in src/assets/products.json and connected it to the project using JSON server to simulate working with a real server. Unfortunately, this tool has limited capabilities, and for example, I cannot obtain only the total number of products to be used in pagination. Therefore, I made a small workaround in src/app/features/goods/goods.service.ts, which I marked with a comment.
-5. That's all for now. In the future, I would like to add tests and modernize the table component to make it more flexible and allow configuring how I want to display rows.
+4. I placed the product data in src/assets/products.json and connected it to the project using JSON Server to simulate working with a real server. Unfortunately, this tool has limited capabilities. For example, I cannot obtain only the total number of products to be used in pagination. Therefore, I made a small workaround in src/app/features/goods/goods.service.ts, which I marked with a comment.
+5. That's all for now. In the future, I would like to add tests and modernize the table component to make it more flexible and configurable in terms of how rows are displayed.
 
 # **Commands to run:**
 
